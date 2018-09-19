@@ -1,0 +1,23 @@
+{
+  "name": "marvel",
+  "version": "1.0.0",
+  "description": "marvel app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcxolani/tshepo-project.git"
+  },
+  "author": "Tshepo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mcxolani/tshepo-project/issues"
+  },
+  "homepage": "https://github.com/mcxolani/tshepo-project#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "request": "^2.88.0"
+  }
+}
