@@ -1,8 +1,11 @@
 const crypto = require('crypto')
 const request = require('request')
 const express = require('express')
+const cors = require('cors')
 
 const app = express()
+app.use(cors())
+
 const port = 3000
 
 const base_url = 'https://gateway.marvel.com:443/v1/public/characters'
@@ -30,4 +33,4 @@ app.get('/', (req, res) => {
     })
 })
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`Marvel app listening on port ${port}!`))
