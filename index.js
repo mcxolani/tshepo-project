@@ -16,7 +16,13 @@ const hash = crypto.createHash('md5').update(ts+private_key+public_key).digest("
 const url = `${base_url}?apikey=${public_key}&hash=${hash}&ts=${ts}`
 
 app.get('/', (req, res) => {
-    request(url, null, (error, response, body) => {
+    const options = {
+        url: url,
+        headers: {
+            'Referer': 'https://developer.marvel.com/'
+        }
+    };
+    request(options, (error, response, body) => {
         if (error) {
             res.json({})
         }
