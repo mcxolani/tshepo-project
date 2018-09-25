@@ -16,9 +16,10 @@ const public_key = '3187ef773dc8ab9f494de9798eec872d'
 const ts = new Date().getTime()
 const hash = crypto.createHash('md5').update(ts+private_key+public_key).digest("hex")
 
-const url = `${base_url}?apikey=${public_key}&hash=${hash}&ts=${ts}`
+const keys = `?apikey=${public_key}&hash=${hash}&ts=${ts}`
 
-app.get('/', (req, res) => {
+app.get('/characters', (req, res) => {
+    const url = `${base_url}${keys}`
     const options = {
         url: url,
         headers: {
@@ -29,7 +30,34 @@ app.get('/', (req, res) => {
         if (error) {
             res.json({})
         }
-        res.json(JSON.parse(body))
+
+        const data = JSON.parse(body).data.results;
+        const payload = data.map(char=>{
+            return { name:char.name, id:char.name };
+        })
+        res.json({characters:payload});
+    })
+})
+
+app.get('/characters/:id', (req, res) => {
+    const id = req.params.id;
+
+    const url = `${base_url}/${id}${keys}`
+
+    const options = {
+        url: url,
+        headers: {
+            'Referer': 'https://developer.marvel.com/'
+        }
+    };
+
+    request(options, (error, response, body) => {
+        if (error) {
+            res.json({})
+        }
+
+        const data = JSON.parse(body).data.results;
+        res.json({characters:data[0]});
     })
 })
 
