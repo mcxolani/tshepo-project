@@ -33,7 +33,7 @@ app.get('/characters', (req, res) => {
 
         const data = JSON.parse(body).data.results;
         const payload = data.map(char=>{
-            return { name:char.name, id:char.name };
+            return { name:char.name, id:char.id };
         })
         res.json({characters:payload});
     })
