@@ -31,11 +31,15 @@ app.get('/characters', (req, res) => {
             res.json({})
         }
 
-        const data = JSON.parse(body).data.results;
-        const payload = data.map(char=>{
-            return { name:char.name, id:char.id };
-        })
-        res.json({characters:payload});
+        if(JSON.parse(body).data) {
+            const data = JSON.parse(body).data.results;
+            const payload = data.map(char=>{
+                return { name:char.name, id:char.id };
+            })
+            res.json({characters:payload});
+        } else {
+            res.json({})
+        }
     })
 })
 
@@ -56,8 +60,12 @@ app.get('/characters/:id', (req, res) => {
             res.json({})
         }
 
-        const data = JSON.parse(body).data.results;
-        res.json({characters:data[0]});
+        if(JSON.parse(body).data) {
+            const data = JSON.parse(body).data.results;
+            res.json({characters:data[0]});
+        } else {
+            res.json({})
+        }
     })
 })
 
